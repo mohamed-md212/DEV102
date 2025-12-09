@@ -28,41 +28,40 @@ textarea{ resize:vertical; min-height:80px; }
   <textarea id="suggestion" placeholder="Votre suggestion ou idée" required></textarea>
   <button type="submit" class="btn">Envoyer</button>
 </form>
-
-<div id="thanks" style="display:none; margin-top:15px; color:#004cbf; font-weight:bold;">
-Merci pour votre suggestion !
-</div>
+<div id="thanks" style="display:none;">Merci pour votre suggestion !</div>
 
 <script>
-const URL_SCRIPT = "TON_URL_WEB_APP_ICI";
+const URL_SCRIPT = "TA_NOUVELLE_URL_WEB_APP";
 
-const form = document.getElementById('suggestionForm');
-form.addEventListener('submit', function(e){
-    e.preventDefault();
+document.getElementById('suggestionForm').addEventListener('submit', function(e) {
+  e.preventDefault();
 
-    const name = document.getElementById('name').value.trim();
-    const suggestion = document.getElementById('suggestion').value.trim();
+  const name = document.getElementById('name').value.trim();
+  const suggestion = document.getElementById('suggestion').value.trim();
 
-    if(name && suggestion){
-        // Envoie les données à Google Sheets
-        fetch(URL_SCRIPT, {
-            method: "POST",
-            mode: "no-cors",
-            body: JSON.stringify({
-                choix: "Oui",       // ici la page correspond à Oui
-                name: name,
-                suggestion: suggestion
-            })
-        })
-        .finally(() => {
-            form.style.display = 'none';
-            document.getElementById('thanks').style.display = 'block';
-        });
-    } else {
-        alert("Veuillez remplir les deux champs.");
-    }
+  if(name && suggestion) {
+    fetch(URL_SCRIPT, {
+      method: "POST",
+      body: JSON.stringify({
+        choix: "Oui",   // ou Non / Pas selon la page
+        name: name,
+        suggestion: suggestion
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(() => {
+      this.style.display = 'none';
+      document.getElementById('thanks').style.display = 'block';
+    })
+    .catch(err => alert("Erreur : " + err));
+  } else {
+    alert("Veuillez remplir les deux champs.");
+  }
 });
 </script>
+
 
 </div>
 </body>

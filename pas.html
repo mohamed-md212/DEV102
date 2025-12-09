@@ -23,11 +23,13 @@ textarea{ resize:vertical; min-height:80px; }
 <h2>Vous avez choisi pas de probléme</h2>
 <p>Veuillez entrer votre nom et votre suggestion :</p>
 
-<form id="suggestionForm">
-  <input type="text" id="name" placeholder="Votre nom" required>
-  <textarea id="suggestion" placeholder="Votre suggestion ou idée" required></textarea>
-  <button type="submit" class="btn">Envoyer</button>
+<form action="TON_URL_WEB_APP" method="post">
+  <input type="hidden" name="choix" value="Oui"> <!-- ou Non / Pas selon la page -->
+  <input type="text" name="name" placeholder="Votre nom" required>
+  <textarea name="suggestion" placeholder="Votre suggestion" required></textarea>
+  <button type="submit">Envoyer</button>
 </form>
+
 <div id="thanks" style="display:none;">Merci pour votre suggestion !</div>
 
 <script>

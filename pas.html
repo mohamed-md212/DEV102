@@ -14,6 +14,21 @@ input, textarea{
 textarea{ resize:vertical; min-height:80px; }
 .btn{ display:block; width:100%; padding:12px; margin-top:15px; border:none; border-radius:8px; background:#004cbf; color:white; cursor:pointer; }
 .btn:hover{ opacity:0.85; }
+.btn{
+  display:block;
+  width:100%;
+  padding:12px;
+  margin-top:15px;
+  border:none;
+  border-radius:8px;
+  background:#004cbf;
+  color:white;
+  cursor:pointer;
+}
+.btn:hover{
+  opacity:0.85;
+}
+
 </style>
 </head>
 <body>
@@ -24,10 +39,10 @@ textarea{ resize:vertical; min-height:80px; }
 <p>Veuillez entrer votre nom et votre suggestion :</p>
 
 <form action="TON_URL_WEB_APP" method="post">
-  <input type="hidden" name="choix" value="Oui"> <!-- ou Non / Pas selon la page -->
+  <input type="hidden" name="choix" value="Oui"> <!-- nom exact "choix" -->
   <input type="text" name="name" placeholder="Votre nom" required>
   <textarea name="suggestion" placeholder="Votre suggestion" required></textarea>
-  <button type="submit">Envoyer</button>
+  <button type="submit" class="btn">Envoyer</button> <!-- ajout de class="btn" -->
 </form>
 
 <div id="thanks" style="display:none;">Merci pour votre suggestion !</div>

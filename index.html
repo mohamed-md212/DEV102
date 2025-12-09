@@ -18,14 +18,13 @@ h2{ color:#004cbf; }
 <img src="PIE.webp" class="logo" alt="OFPPT Logo">
 <h2>Est-ce que vous souffrez du manque de communication dans l’établissement ?</h2>
 
-<button class="btn" onclick="sendAndRedirect('oui', 'oui.html')">Oui, on souffre</button>
-<button class="btn" onclick="sendAndRedirect('non', 'non.html')">Non</button>
-<button class="btn" onclick="sendAndRedirect('pas', 'pas.html')">Je ne considère pas comme un problème</button>
-
+<button class="btn" onclick="send('oui'); location.href='oui.html'">Oui, on souffre</button>
+<button class="btn" onclick="send('non'); location.href='non.html'">Non</button>
+<button class="btn" onclick="send('pas'); location.href='pas.html'">Je ne considère pas comme un problème</button>
 </div>
 
 <script>
-const URL_SCRIPT = "https://script.google.com/macros/s/AKfycbzGhPoZdIpzuTI5CSNMX3zhEpxvLNgLgtBhV_Mbhu4OZdwT6S3m8vP8k1kM3XPmissQdQ/exec";
+const URL_SCRIPT = "https://script.google.com/macros/s/AKfycbwJZ9vRAyMbbE9cFrXKXobmuObwAyqbJxTd0t1gst_MEQzQ7b0mFeODDEc0C5ylPR-2/exec";
 
 function sendAndRedirect(choice, page) {
   // On envoie la donnée au Google Sheet

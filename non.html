@@ -14,6 +14,21 @@ input, textarea{
 textarea{ resize:vertical; min-height:80px; }
 .btn{ display:block; width:100%; padding:12px; margin-top:15px; border:none; border-radius:8px; background:#004cbf; color:white; cursor:pointer; }
 .btn:hover{ opacity:0.85; }
+.btn{
+  display:block;
+  width:100%;
+  padding:12px;
+  margin-top:15px;
+  border:none;
+  border-radius:8px;
+  background:#004cbf;
+  color:white;
+  cursor:pointer;
+}
+.btn:hover{
+  opacity:0.85;
+}
+
 </style>
 </head>
 <body>
@@ -24,46 +39,48 @@ textarea{ resize:vertical; min-height:80px; }
 <p>Veuillez entrer votre nom et votre suggestion :</p>
 
 <form action="TON_URL_WEB_APP" method="post">
-  <input type="hidden" name="choix" value="Oui"> <!-- ou Non / Pas selon la page -->
+  <input type="hidden" name="choix" value="Oui"> <!-- nom exact "choix" -->
   <input type="text" name="name" placeholder="Votre nom" required>
   <textarea name="suggestion" placeholder="Votre suggestion" required></textarea>
-  <button type="submit">Envoyer</button>
+  <button type="submit" class="btn">Envoyer</button> <!-- ajout de class="btn" -->
 </form>
 
-<div id="thanks" style="display:none;">Merci pour votre suggestion !</div>
+
+
+<div id="thanks" style="display:none; margin-top:15px; color:#004cbf; font-weight:bold;">
+Merci pour votre suggestion !
+</div>
 
 <script>
-const URL_SCRIPT = "TA_NOUVELLE_URL_WEB_APP";
+const URL_SCRIPT = "TON_URL_WEB_APP_ICI";
 
-document.getElementById('suggestionForm').addEventListener('submit', function(e) {
-  e.preventDefault();
+const form = document.getElementById('suggestionForm');
+form.addEventListener('submit', function(e){
+    e.preventDefault();
 
-  const name = document.getElementById('name').value.trim();
-  const suggestion = document.getElementById('suggestion').value.trim();
+    const name = document.getElementById('name').value.trim();
+    const suggestion = document.getElementById('suggestion').value.trim();
 
-  if(name && suggestion) {
-    fetch(URL_SCRIPT, {
-      method: "POST",
-      body: JSON.stringify({
-        choix: "Oui",   // ou Non / Pas selon la page
-        name: name,
-        suggestion: suggestion
-      }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    .then(() => {
-      this.style.display = 'none';
-      document.getElementById('thanks').style.display = 'block';
-    })
-    .catch(err => alert("Erreur : " + err));
-  } else {
-    alert("Veuillez remplir les deux champs.");
-  }
+    if(name && suggestion){
+        // Envoie les données à Google Sheets
+        fetch(URL_SCRIPT, {
+            method: "POST",
+            mode: "no-cors",
+            body: JSON.stringify({
+                choix: "Oui",       // ici la page correspond à Oui
+                name: name,
+                suggestion: suggestion
+            })
+        })
+        .finally(() => {
+            form.style.display = 'none';
+            document.getElementById('thanks').style.display = 'block';
+        });
+    } else {
+        alert("Veuillez remplir les deux champs.");
+    }
 });
 </script>
-
 
 </div>
 </body>
